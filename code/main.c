@@ -5,7 +5,7 @@
 
 int main()
 {
-	sort();
-	system("PAUSE");
-	return 0;
+    sort();
+    system("PAUSE");
+    return 0;
 }
