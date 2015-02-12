@@ -33,10 +33,22 @@ static char *reverse(char* p)
     return p;
 }
 
+static char *m_strcpy(char *dst, const char *src)
+{
+	// 空指针检查
+	assert(dst!=NULL);
+	assert(src!=NULL);
+	// 指针重叠检查
+	memcpy(dst, src, strlen(src)+1);
+	return dst;
+}
+
 void string()
 {
+	char tmp[13];
     printf("\nString:\n");
     printf("strlen: %d\n", strlen(p));
     printf("m_strlen: %d\n", m_strlen(p));
     printf("reverse: %s\n", reverse(p));
+	printf("strcpy: %s\n", m_strcpy(tmp, p));
 }
