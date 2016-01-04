@@ -148,6 +148,44 @@ static void shell_sort(int a[], int n)
     }
 }
 
+static void merge(int a[], int first, int mid, int last, int tmp[])
+{
+	int i = first, j = mid + 1;
+	int m = mid, n = last;
+	int k = 0;
+	// ¹é²¢
+	while (i <= m && j <= n)
+	{
+		if (a[i] <= a[j])
+			tmp[k++] = a[i++];
+		else
+			tmp[k++] = a[j++];
+	}
+	// ×ó±ßÊ£Óà
+	while (i <= m)
+		tmp[k++] = a[i++];
+	// ÓÒ±ßÊ£Óà
+	while (j <= n)
+		tmp[k++] = a[j++];
+	// ¿½±´µ½Ô­Êý×é
+	for (i = 0; i < k; i++)
+		a[first + i] = tmp[i];
+}
+static void merge_sort(int a[], int first, int last, int tmp[])
+{
+	int mid = 0;
+	if (first < last)
+	{
+		mid = (first + last) / 2;
+		// ×ó±ßÅÅÐò
+		merge_sort(a, first, mid, tmp);
+		// ÓÒ±ßÅÅÐò
+		merge_sort(a, mid + 1, last, tmp);
+		// ºÏ²¢
+		merge(a, first, mid, last, tmp);
+	}
+}
+
 void sort()
 {
     int a1[]={3,24,2,1,99,2,34,22,32,11};
@@ -155,6 +193,8 @@ void sort()
     int a3[]={3,24,2,1,99,2,34,22,32,11};
     int a4[]={3,24,2,1,99,2,34,22,32,11};
     int a5[]={3,24,2,1,99,2,34,22,32,11};
+	int a6[]={3,24,2,1,99,2,34,22,32,11};
+	int tmp[10];
     printf("Origin Array:\n");
     print_a(a1, 10);
 
@@ -182,4 +222,9 @@ void sort()
     printf("Shel Sort:\n");
     shell_sort(a5, 10);
     print_a(a5, 10);
+
+	// ¹é²¢ÅÅÐò
+	printf("Merge Sort:\n");
+	merge_sort(a6, 0, 9, tmp);
+	print_a(a6, 10);
 }
